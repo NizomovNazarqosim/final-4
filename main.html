@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,900&family=Lexend+Deca&family=Montserrat:wght@400;500;700&family=Permanent+Marker&family=Poppins:wght@400;500&family=Public+Sans:wght@400;700;900&family=Roboto:wght@400;500;700;900&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,900&family=Lexend+Deca&family=Montserrat:wght@400;500;700&family=Noto+Sans+Anatolian+Hieroglyphs&family=Permanent+Marker&family=Poppins:wght@400;500&family=Public+Sans:wght@400;700;900&family=Roboto:wght@400;500;700;900&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./main.css">
+    <title>4-imtihon</title>
+</head>
+<body>
+
+<!-- Start of Header -->
+ <header>
+    <div class="container">
+    <div class="header__wrapper">
+        <img class="header__logo" src="./images/home-logo.svg" alt="">
+        <img class="header__search" src="./images/search-log.svg" alt="">
+        <div class="input-wrap">
+   <form class="form__header">
+    <input class="header__input" type="text" placeholder="Search books">
+
+   </form>
+        </div>
+        <img class="sun__logo" src="./images/sun-logo.svg" alt="">
+        <button class="logout">Logout</button>
+    </div>
+    <nav class="navbar">
+       <p class="result">Showing <span class="number__books"></span> Result(s)</p>
+       <div class="sort__wrapper">
+        <img class="calendar" src="./images/calendar-logo.svg" alt="">
+        <p class="sort">Order by newest</p>
+       </div>
+    </nav>
+    </div>
+ </header>
+<!-- End of Header -->
+
+<!-- Start of main -->
+ <main class="main">
+   <div class="container">
+   <div class="wrap">
+       <!--start  main left part(bookmark) -->
+    <div class="left">
+        <h2 class="left-heading">Bookmarks</h2>
+        <p class="left-text">If you don’t like to read, you haven’t found the right book</p>
+      <ul class="bookmark__list"></ul>    
+    </div>
+    <!--end  main left part(bookmark) -->
+
+    <!-- start of right part -->
+    <div class="right">
+        <ul class="list">
+
+        </ul>
+    </div>
+    <!-- end of right part -->
+   </div>
+   </div>
+ </main>
+<!-- Start of main -->
+
+<footer>
+    <div class="container">
+        <div class="numbers-wrapper">
+            <button class="prev-btn">&laquo;</button>
+               <div class="num-wrap">
+                
+               </div>
+            <button class="next-btn">&raquo;</button>
+        </div>
+    </div>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+</html>
