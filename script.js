@@ -9,12 +9,16 @@ const input = document.querySelector(".header__input");
 const elFormInput = document.querySelector(".form__header");
 const orderBy = document.querySelector(".sort__wrapper");
 const bookmarkedList = document.querySelector(".bookmark__list");
+const ad = document.querySelector(".ad");
+const infoBtn = document.querySelector(".info__btn");
+const modallar = document.querySelector(".modals");
+const overlay = document.querySelector(".overlay");
 
-let search = "harry" ;
+let search = "math" ;
 let page = 1;
- 
+let bookslar = []
 const bookmarks = []
-console.log(bookmarks);
+const modals = []
 
 bookmarkedList.addEventListener("click", function(evt){
   if(evt.target.matches(".bookmark-delete-btn")){
@@ -40,20 +44,32 @@ const renderBookmarks = function(array, element){
   bookmarkedList.innerHTML = null;
   array.forEach(bookmark => {
     const bookmarkItem = document.createElement("li");
+    const bookmarkDiv = document.createElement("div");
     const bookmarkHeading = document.createElement("h2");
+    const bookmarkAuthor = document.createElement("h3");
     const removeBtn = document.createElement("button");
+    const bookmarkRead = document.createElement("a");
+
 
     bookmarkHeading.textContent = bookmark.volumeInfo.title;
-    removeBtn.textContent = "remove"
+    bookmarkAuthor.textContent = bookmark.volumeInfo.authors[0];
+    removeBtn.textContent = "D";
+    bookmarkRead.textContent = "R";
 
     removeBtn.dataset.bookmarkDeleteId= bookmark.id;
 
-    bookmarkItem.classList.add(".bookmark-item")
-    removeBtn.setAttribute("class", "bookmark-delete-btn")
+    bookmarkItem.classList.add("bookmark-item")
+    bookmarkHeading.classList.add("bookmark-heading");
+    bookmarkAuthor.classList.add("bookmark-author");
+    removeBtn.setAttribute("class", "bookmark-delete-btn bookmark-delete");
+    bookmarkRead.classList.add("bookmark-read")
 
     element.appendChild(bookmarkItem)
-    bookmarkItem.appendChild(bookmarkHeading);
+    bookmarkItem.appendChild(bookmarkDiv)
+    bookmarkDiv.appendChild(bookmarkHeading);
+    bookmarkDiv.appendChild(bookmarkAuthor);
     bookmarkItem.appendChild(removeBtn);
+    bookmarkItem.appendChild(bookmarkRead);
   })
 }
 renderBookmarks(bookmarks, bookmarkedList)
@@ -64,8 +80,9 @@ elList.addEventListener("click", function(evt){
     const bookmarkId = evt.target.dataset.bookmarkBtnId;
 
  
+    console.log(bookslar);
 
-    const foundBookmark = books[0].find(item => item.id === bookmarkId);
+    const foundBookmark = bookslar.find(item => item.id === bookmarkId);
     const x = bookmarks.find(e => e.id == bookmarkId);
 
     if(!x){
@@ -84,7 +101,6 @@ elList.addEventListener("click", function(evt){
 
 const renderBooks = function(arr, htmlElement){
 
-
 arr.forEach(book => {
     // Create element
   const newItem = document.createElement("li");
@@ -95,13 +111,16 @@ arr.forEach(book => {
   const itemYear = document.createElement("p");
   const bookmarkBtn = document.createElement("button");
   const infokBtn = document.createElement("button");
-  const readBtn = document.createElement("button");
+  const readBtn = document.createElement("a");
 
 
   bookmarkBtn.dataset.bookmarkBtnId = book.id;
+  infokBtn.dataset.infoBtnId = book.id;
+  // readBtn.dataset.readBtnID = book.id;
 
 
 //   setAtribute
+
  newItem.classList.add("list__item");
  wrapper.classList.add("item__wrapper");
 
@@ -125,6 +144,8 @@ arr.forEach(book => {
 
   readBtn.textContent = "Read";
   readBtn.classList.add("read__btn");
+  readBtn.setAttribute("href", `${book.volumeInfo.previewLink}`)
+
 
 
 //   appendChild
@@ -137,8 +158,6 @@ arr.forEach(book => {
   wrapper.appendChild(bookmarkBtn);
   wrapper.appendChild(infokBtn);
   wrapper.appendChild(readBtn);
-
-
 
 });
 
@@ -155,6 +174,7 @@ const getBooks = async function(){
 
     const  books = await request.json();
     console.log(books);
+    bookslar = books.items
    renderBooks(books.items, elList)
    btns(books, num);
   
@@ -176,12 +196,14 @@ orderBy.addEventListener("click", () => {
 
 // pagination
 function btns(arr){
+  num.innerHTML = null;
       for(let i = 1; i < Math.ceil(arr.totalItems / 10); i++){
 
         const numBtn = document.createElement("button");
         numBtn.classList.add("btns");
 
         numBtn.textContent = i;
+
 
         num.appendChild(numBtn);
          
@@ -231,8 +253,94 @@ if (!token) {
 logout.addEventListener("click", function () {
   window.localStorage.removeItem("token");
 
-  window.location.replace("login.html");
+  window.location.replace("index.html");
 }); 
 
 
 // modal
+elList.addEventListener("click", function(evt){
+  if(evt.target.matches(".info__btn")){
+    const infoId = evt.target.dataset.infoBtnId;
+    const foundInfo = bookslar.find(found => found.id === infoId);
+
+    modallar.style.display = "block"
+    
+    
+    modals.push(foundInfo);
+    renderModal(modals,ad);
+  }
+})
+modallar.addEventListener("click", function(evt){
+  if(evt.target.matches(".x-logo")){
+    modallar.style.display = "none"
+  }
+})
+overlay.addEventListener("click", function(evt){
+  
+    modallar.style.display = "none"
+
+})
+
+
+
+const renderModal = function(array, htmlElement){
+  ad.innerHTML = null
+  array.forEach(info =>{
+    ad.innerHTML = null
+    const modalWrapper = document.createElement("div");
+    const modalHeader = document.createElement("div");
+    const modalX = document.createElement("img");
+    const modalHeading = document.createElement("h2");
+    const modalImg = document.createElement("img");
+    const modalDesc = document.createElement("p");
+    const modalAuthor = document.createElement("p");
+    const modalYear = document.createElement("p");
+    const modalPublisher = document.createElement("p");
+    const modalCategory = document.createElement("p");
+    const modalPage = document.createElement("p");
+
+  modalHeader.classList.add("modal-header");
+  modalX.classList.add("x-logo");
+  modalHeading.classList.add("modal-heading");
+  modalImg.classList.add("modal-img");
+  modalDesc.classList.add("modal-desc");
+  modalAuthor.classList.add("modal-author");
+  modalYear.classList.add("modal-year");
+  modalPublisher.classList.add("modal-publisher");
+  modalCategory.classList.add("modal-category");
+  modalPage.classList.add("modal-page");
+
+   modalHeading.textContent = info.volumeInfo.title;
+   modalImg.textContent = info.volumeInfo.imageLinks.thumbnail;
+   modalDesc.textContent = info.volumeInfo.description;
+   modalX.textContent = ` &#10006`;
+   modalAuthor.textContent = `Authors: ${info.volumeInfo.authors}`;
+   modalYear.textContent = `Published: ${info.volumeInfo.publishedDate}`
+   modalPublisher.textContent = `Publishers:${info.volumeInfo.publisher}`
+   modalCategory.textContent = `Categories:${info.volumeInfo.categories}`
+   modalPage.textContent = `Pages Count:${info.volumeInfo.pageCount}`
+
+
+   htmlElement.appendChild(modalWrapper);
+   modalWrapper.appendChild(modalHeader);
+   modalHeader.appendChild(modalHeading);
+   modalHeader.appendChild(modalX);
+   modalWrapper.appendChild(modalImg);
+   modalWrapper.appendChild(modalDesc);
+   modalWrapper.appendChild(modalAuthor);
+   modalWrapper.appendChild(modalYear);
+   modalWrapper.appendChild(modalPublisher);
+   modalWrapper.appendChild(modalCategory);
+   modalWrapper.appendChild(modalPage);
+  
+  })
+}
+
+
+// elList.addEventListener("click", function(evt){
+//   if(evt.target.matches(".read__btn")){
+//     const readId = evt.target.dataset.infoBtnId;
+//     const founded = bookslar.find(found => found.id === readId);
+
+//   }
+// })

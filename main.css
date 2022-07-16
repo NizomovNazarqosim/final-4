@@ -163,12 +163,13 @@ header{
     font-size: 14px;
     line-height: 17px;
     color: #0D75FF;
+    margin-bottom: 15px;
 }
 .info__btn:hover{
     background-color: #b6c4ee;
 }
 .read__btn{
-    margin-top: 5px;
+    margin-top: 75px;
     background: #75828A;
     border-radius: 4px;
     width: 246px;
@@ -181,6 +182,10 @@ header{
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+    padding: 8px 82px;
+    text-align: center;
+    margin-left: 20px;
+    text-decoration: none;
 }
 .read__btn:hover{
     background-color: #40525e;
@@ -301,13 +306,13 @@ header{
     border: none;
     background: none;
   }
-  .modal {
+  .ad{
     position: absolute;
-    top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
-  
+    top: 48%;
+    left: 78%;
+    height: 800px;
+    width: 500px;
     background-color: white;
     padding: 6rem;
     border-radius: 5px;
@@ -315,13 +320,121 @@ header{
     z-index: 10;
   }
   
+  .modals{
+    display: flex;
+    display: none;
+  }
   .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 145%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
     z-index: 5;
   }
+  .modal-heading{
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: #222531;
+  }
+  .modal-img{
+    width: 230px;
+    height: 300px;
+    border-radius: 5px;
+  }
+  .modal-header{
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+  }
+  .x-logo{
+    width: 15px;
+    height: 15px;
+    border: none;
+    background: transparent;
+    margin-top: 30px;
+    cursor: pointer;
+    color: black;
+  }
+  .modal-heading{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+color: #222531;
+  }
+.modal-img{
+    border-radius: 5px;
+    text-align: center;
+}  
+.modal-desc{
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 170.3%;
+    color: #58667E;    
+}
+.modal-author, .modal-year, .modal-publisher, .modal-category, .modal-page{
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #222531;
+}
+.bookmark__list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.bookmark-item{
+    border-radius: 12px;
+    padding: 5px;
+   width: 218px;
+   height: 72px;
+   display: flex;
+   margin-top: 10px;
+}
+.bookmark-heading{
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+}
+.bookmark-author{
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    color: #757881;
+}
+.bookmark-delete{
+    margin: 0 5px;
+    margin-top: 20px;
+    background-color: red;
+    border: none;
+    border-radius: 6px;
+    height: 30px;
+    width: 44px;
+}
+.bookmark-read{
+    margin-top: 20px;
+    border: none;
+    border-radius: 6px;
+    height: 24px;
+    width: 44px;
+    background-color: yellow;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 6px;
+}
